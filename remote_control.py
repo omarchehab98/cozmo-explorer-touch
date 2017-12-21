@@ -321,26 +321,32 @@ def handle_updateCozmo():
         remote_control_cozmo.update()
     return ""
 
-def handle_key_event(key_request, is_key_down):
-    message = json.loads(key_request.data.decode("utf-8"))
+def handle_key_event(message, is_key_down):
     if remote_control_cozmo:
-        remote_control_cozmo.handle_key(key_code=(message['keyCode']), is_shift_down=message['hasShift'], is_ctrl_down=message['hasCtrl'], is_alt_down=message['hasAlt'],is_key_down=is_key_down)
+        remote_control_cozmo.handle_key(
+            key_code=(message['keyCode']),
+            is_shift_down=message['hasShift'],
+            is_ctrl_down=message['hasCtrl'],
+            is_alt_down=message['hasAlt'],
+            is_key_down=is_key_down)
     return ""
 
 @remote_control.route('/keydown', methods=['POST'])
-def handle_keydown():
+def handle_http_keydown():
     """Called from Javascript whenever a key is down (note: can generate repeat calls if held down)"""
-    return handle_key_event(request, is_key_down=True)
+    message = json.loads(request.data.decode("utf-8"))
+    return handle_key_event(message, is_key_down=True)
 
 
 @remote_control.route('/keyup', methods=['POST'])
-def handle_keyup():
+def handle_http_keyup():
     """Called from Javascript whenever a key is released"""
-    return handle_key_event(request, is_key_down=False)
+    message = json.loads(request.data.decode("utf-8"))
+    return handle_key_event(message, is_key_down=False)
 
 
 @remote_control.route('/setHeadlightEnabled', methods=['POST'])
-def handle_setHeadlightEnabled():
+def handle_http_setHeadlightEnabled():
     '''Called from Javascript whenever headlight is toggled on/off'''
     message = json.loads(request.data.decode("utf-8"))
     if remote_control_cozmo:
@@ -349,7 +355,7 @@ def handle_setHeadlightEnabled():
 
 
 @remote_control.route('/setFreeplayEnabled', methods=['POST'])
-def handle_setFreeplayEnabled():
+def handle_http_setFreeplayEnabled():
     '''Called from Javascript whenever freeplay mode is toggled on/off'''
     message = json.loads(request.data.decode("utf-8"))
     if remote_control_cozmo:
@@ -375,8 +381,38 @@ def handle_getDebugInfo():
     return ""
 
 
-def activate_controls(_robot):
+def activate_controls(_robot, socketio):
     global robot
     robot = _robot
     global remote_control_cozmo
     remote_control_cozmo = RemoteControlCozmo(robot)
+
+    @socketio.on('keydown')
+    def handle_socket_keydown(json):
+        """Called from Javascript whenever a key is down (note: can generate repeat calls if held down)"""
+        print('keydown', json)
+        return handle_key_event(json, is_key_down=True)
+
+    @socketio.on('keyup')
+    def handle_socket_keyup(json):
+        """Called from Javascript whenever a key is released"""
+        print('keyup', json)
+        return handle_key_event(json, is_key_down=False)
+
+    @socketio.on('setHeadlightEnabled')
+    def handle_socket_setHeadlightEnabled(json):
+        '''Called from Javascript whenever headlight is toggled on/off'''
+        print(json)
+        remote_control_cozmo.cozmo.set_head_light(enable=json['isHeadlightEnabled'])
+        return ""
+
+
+    @socketio.on('setFreeplayEnabled')
+    def handle_socket_setFreeplayEnabled(json):
+        '''Called from Javascript whenever freeplay mode is toggled on/off'''
+        print(json)
+        if json['isFreeplayEnabled']:
+            remote_control_cozmo.cozmo.start_freeplay_behaviors()
+        else:
+            remote_control_cozmo.cozmo.stop_freeplay_behaviors()
+        return ""
