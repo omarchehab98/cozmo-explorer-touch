@@ -1,0 +1,113 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: #26646a;
+  background: radial-gradient(ellipse at center, #26646a 0%,#205156 40%,#1d494d 60%,#16373a 100%);
+}
+
+#camera {
+  width: 640px;
+  height: 480px;
+}
+
+@media (pointer: coarse) {
+  #keyboard-controls {
+    display: none;
+  }
+}
+
+@media (pointer: fine) {
+  #touch-controls {
+    display: none;
+  }
+}
+
+@media (pointer: none) {
+  #keyboard-controls {
+    display: none;
+  }
+
+  #touch-controls {
+    display: none;
+  }
+}
+
+#keyboard-controls {
+  background-image: url('../img/controls_background_wide.svg');
+  background-repeat: no-repeat;
+  position: relative;
+  user-select: none;
+  cursor:default;
+  width: 640px;
+  height: 170px;
+}
+
+.keyboard-button {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background-color: #D8D8D8;
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid #4A4A4A;
+  text-align: center;
+  line-height: 44px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #4A4A4A;
+}
+
+.keyboard-button:hover {
+  background-color: #979797;
+}
+
+.keyboard-button:active {
+  background-color: #979797;
+  color: #ffffff;
+}
+
+.keyboard-state {
+  position: absolute;
+  width: 70px;
+  height: 27px;
+  background-color: #aaaaaa;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 27px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.keyboard-state:active {
+  background-color: #4A4A4A;
+}
+
+.keyboard-toggle {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  background-color: #D8D8D8;
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid #4A4A4A;
+  text-align: center;
+  line-height: 44px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #9B9B9B;
+}
+
+.keyboard-toggle:hover {
+  color: #ffffff;
+  background-color: #979797;
+}
+
+.keyboard-toggle:checked {
+  color: #ffffff;
+  background-image: linear-gradient(to bottom, #4A4A4A, #878787);
+}

@@ -30,9 +30,10 @@ robot = None
 @viewer.route("/cozmoImage")
 def handle_cozmoImage():
     """Stream of video from cozmo's camera"""
-    return Response(
-        cozmoImageGenerator(16, 30),
+    response = Response(cozmoImageGenerator(16, 30),
         mimetype='multipart/x-mixed-replace; boundary=frame')
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    return response
 
 
 def cozmoImageGenerator(fps=30, quality=90):
@@ -61,6 +62,8 @@ def cozmoImageGenerator(fps=30, quality=90):
             image.paste(linesOverlayImage, mask=linesOverlayImage)
         else:
             # Show a gray image
+            image_width = 320
+            image_height = 240
             image_bytes = bytearray([0x70, 0x70, 0x70]) * image_width * image_height
             image = Image.frombytes('RGB', (image_width, image_height), bytes(image_bytes))
 

@@ -14,3 +14,11 @@
 .idea/modules.xml
 
 .idea/vcs.xml
+
+node_modules
+
+.cache
+
+dist
+
+.vscode

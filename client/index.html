@@ -1,12 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Cozmo Explorer</title>
-    <link rel="stylesheet" href="static/css/style.css?q={{ randomID }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Cozmo Explorer Touch</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <img src="cozmoImage" id="cozmoImage">
+    <img id="camera" src="img/cozmo_placeholder.png">
 
     <div id="keyboard-controls">
         <button id="ctrl_btn_W"
@@ -73,8 +74,7 @@
         </button>
     </div>
 
-    <script src="static/js/socket.io-1.7.4.min.js"></script>
-    <script src="static/js/main.js?q={{ randomID }}"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
