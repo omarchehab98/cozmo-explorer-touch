@@ -8,7 +8,8 @@ https://github.com/touretzkyds/cozmo-tools
 
 Created by: David S. Touretzky, Carnegie Mellon University
 
-Edited by: GrinningHermit
+Edited by: GrinningHermit, Omar Chehab
+
 =====
 
 """

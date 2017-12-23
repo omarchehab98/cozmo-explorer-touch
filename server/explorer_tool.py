@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
-
 """
-    List all Cozmo animations on a web page with buttons to try the animations.
-    In order to run this script, you also need all the other files inside the project.
-    If that is the case, running this script will load the interface.
 
-    Created by: GrinningHermit
+Explorer Tool for Cozmo
+============================
+
+Starts the server providing and API to command cozmo and streaming video from the camera.
+
+Created by: GrinningHermit
+
+Edited by: Omar Chehab
+
+=====
+
 """
 import datetime
 import queue

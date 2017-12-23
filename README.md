@@ -1,40 +1,41 @@
-# Cozmo Explorer Tool v0.5
-Interface exposing functionality of the robot Cozmo from Anki
----
-This tool gives control over Cozmo. You can look through his camera while using keyboard buttons to control him. The event monitor helps in checking when he detects something, like seeing a cube or being picked up. It also includes all functions from the Animation Explorer, listing and playing all built-in animations. Making a movie, scaring your cat or writing code should be easier using the Cozmo Explorer Tool. A lot of the code is derived from remote-control-cozmo.py from the SDK examples and [cozmo-tools](https://github.com/touretzkyds/cozmo-tools)' event monitor.
+# Cozmo Explorer Touch
 
 ![Cozmo-Explorer-Tool](explorer-tool.png)
 
-What does it do exactly?
--
-Running the script 'explorer_tool.py' in python will open a web page. It is divided in 3 sections:
+## What does it do exactly?
 
-ROBOT CAMERA AND CONTROL: A constant camera feed is visible. While mousing over this area, controls for Cozmo are also visible, indicating how to control Cozmo with the keyboard. It's also possible to make the feed full screen and turn on the IR light or turn on free play mode which makes Cozmo roam around freely as if he's in 'app' mode instead of SDK mode.
+With this tool you can control Cozmo from the browser. I created it so that my family and friends can control Cozmo overseas. In a nutshell, it allows you to remote control cozmo from anywhere.
 
-What do you need to use it?
--
-1. Cozmo himself (http://anki.com/cozmo)
-2. A PC and a mobile device
-3. A little knowledge about Python
-4. Knowledge of the Cozmo SDK (http://cozmosdk.anki.com/docs)
-5. The files in this repository
-6. The python module Pillow. (pip3 install --user Pillow, usually already installed when working with the Cozmo SDK)
-7. The python module Flask. (pip3 install --user flask)
-8. The python module Flask Socket-IO. (pip3 install --user flask-socketio)
+## What do you need to use it?
 
-If you know how to run an example file from the Cozmo SDK, you should be able to run this script. 
+1. Cozmo (http://anki.com/cozmo)
+2. A PC and a mobile device connected via USB cable
+3. The files in this repository `git clone https://github.com/omarchehab98/cozmo-explorer-touch`
 
-System requirements
--
-- PC with Windows OS, mac OSX or Linux
-- Python 3.5.1 or later
-- WiFi connection
-- An iOS or Android mobile device with the Cozmo app installed, connected to the PC via USB cable
+### Requirements
 
-Installation notes
--
-- Run 'explorer_tool.py' and open a browser window at 0.0.0.0:5000. Similar to 'remote_control_cozmo.py' from the Cozmo SDK examples.
-- Install the entire project, not just the .py file, or it won't work.
+* Device running Windows OS, Mac OSX or Linux with an internet connection
+  * [Cozmo SDK is setup](http://cozmosdk.anki.com/docs)
+  * Python 3 and pip
+    * The python module Pillow `pip3 install --user Pillow`
+    * The python module Flask `pip3 install --user flask`
+    * The python module Flask Socket-IO `pip3 install --user flask-socketio`
+    * The python module Cozmo with camera support `pip3 install --user 'cozmo[camera]'`
+  * Node Carbon and npm
+    * In the `client` directory, run `npm install`
 
+* Device running iOS or Android
+  * Cozmo app installed
+  * Connected to computer via USB cable
+  * Cozmo app is in SDK mode
 
+### Starting the server
 
+* Run `server/explorer_tool.py` and open a browser window at http://localhost:5000
+* In the client directory, run `npm start`
+
+## License
+
+Forked from [GrinningHermit/Cozmo-Explorer-Tool](https://github.com/GrinningHermit/Cozmo-Explorer-Tool).
+
+MIT &copy; 2017 Omar Chehab

@@ -8,11 +8,9 @@ https://developer.anki.com
 
 Created by: Anki
 
-Edited by: GrinningHermit
+Edited by: GrinningHermit, Omar Chehab
 
-Code from example file is separated in 2 functionalities:
-- viewer / robot camera
-- keyboard command handling <-- this is where you are
+Handles commanding Cozmo using the keyboard.
 
 =====
 
