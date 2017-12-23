@@ -7,7 +7,47 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <img id="camera" src="img/cozmo_placeholder.png">
+    <div>
+        <img id="battery-low" src='img/battery-low.svg' alt="Battery is low" style="display: none;">
+
+        <img id="battery-charging" src='img/battery-charging.svg' alt="Battery is charging" style="display: none;">
+
+        <button id="fullscreen">
+            <img src='img/fullscreen.svg' alt="Full Screen">
+        </button>
+    </div>
+    
+    <div id="touch-controls">
+        <div id="touch-speed" class="touch-slider">
+            <button class="touch-slider-knob" aria-label="Speed Knob" style="transform: translateY(92px)">
+                
+            </button>
+        </div>
+
+        <img id="camera" src="img/cozmo_placeholder.png">
+        
+        <div id="touch-group-lifthead">
+            <input type="radio"
+                class="touch-switch"
+                name="touch-lifthead"
+                value="touch-lift"
+                checked>
+            <input type="radio"
+                class="touch-switch"
+                name="touch-lifthead"
+                value="touch-head">
+            <div id="touch-lift" class="touch-slider">
+                <button class="touch-slider-knob" aria-label="Lift Knob" style="transform: translateY(92px)">
+
+                </button>
+            </div>
+            <div id="touch-head" class="touch-slider">
+                <button class="touch-slider-knob" aria-label="Head Knob" style="transform: translateY(92px)">
+
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div id="keyboard-controls">
         <button id="ctrl_btn_W"

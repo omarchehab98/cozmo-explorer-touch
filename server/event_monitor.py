@@ -31,45 +31,31 @@ class CheckState (threading.Thread):
         self.q = _q
 
     def run(self):
-        delay = 10
-        is_picked_up = False
-        is_falling = False
-        is_on_charger = False
+        is_picked_up = None
+        is_falling = None
+        is_on_charger = None
+        battery_voltage = None
+
         while thread_running:
-            if robot.is_picked_up:
-                delay = 0
-                if not is_picked_up:
-                    is_picked_up = True
-                    msg = 'cozmo.robot.Robot.is_pickup_up: True'
-                    self.q.put(msg)
-            elif is_picked_up and delay > 9:
-                is_picked_up = False
-                msg = 'cozmo.robot.Robot.is_pickup_up: False'
-                self.q.put(msg)
-            elif delay <= 9:
-                delay += 1
+            if robot.is_picked_up != is_picked_up:
+              is_picked_up = robot.is_picked_up
+              msg = 'cozmo.robot.Robot.is_pickup_up: ' + str(is_picked_up)
+              self.q.put(msg)
 
-            if robot.is_falling:
-                if not is_falling:
-                    is_falling = True
-                    msg = 'cozmo.robot.Robot.is_falling: True'
-                    self.q.put(msg)
-            elif not robot.is_falling:
-                if is_falling:
-                    is_falling = False
-                    msg = 'cozmo.robot.Robot.is_falling: False'
-                    self.q.put(msg)
+            if robot.is_falling != is_falling:
+              is_falling = robot.is_falling
+              msg = 'cozmo.robot.Robot.is_falling: ' + str(is_falling)
+              self.q.put(msg)
 
-            if robot.is_on_charger:
-                if not is_on_charger:
-                    is_on_charger = True
-                    msg = 'cozmo.robot.Robot.is_on_charger: True'
-                    self.q.put(msg)
-            elif not robot.is_on_charger:
-                if is_on_charger:
-                    is_on_charger = False
-                    msg = 'cozmo.robot.Robot.is_on_charger: False'
-                    self.q.put(msg)
+            if robot.is_on_charger != is_on_charger:
+              is_on_charger = robot.is_on_charger
+              msg = 'cozmo.robot.Robot.is_on_charger: ' + str(is_on_charger)
+              self.q.put(msg)
+            
+            if round(robot.battery_voltage * 10) / 10 != battery_voltage:
+              battery_voltage = round(robot.battery_voltage * 10) / 10
+              msg = 'cozmo.robot.Robot.battery_voltage: ' + str(battery_voltage)
+              self.q.put(msg)
 
             time.sleep(0.1)
 

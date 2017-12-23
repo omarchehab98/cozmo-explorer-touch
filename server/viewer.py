@@ -30,7 +30,7 @@ robot = None
 @viewer.route("/cozmoImage")
 def handle_cozmoImage():
     """Stream of video from cozmo's camera"""
-    response = Response(cozmoImageGenerator(16, 30),
+    response = Response(cozmoImageGenerator(),
         mimetype='multipart/x-mixed-replace; boundary=frame')
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     return response
@@ -41,9 +41,8 @@ def cozmoImageGenerator(fps=30, quality=90):
     Generates image frames at a given rate per second for use in a multiple/x-mixed-replace response
     """
     while True:
-        image = robot.world.latest_image
-        if image:
-            image = image.raw_image
+        if robot and robot.world.latest_image:
+            image = robot.world.latest_image.raw_image
             
             # Smoothen the image
             image = image.filter(ImageFilter.SMOOTH_MORE)

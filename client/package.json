@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html -p 5000",
     "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +22,7 @@
     "parcel-bundler": "^1.2.1"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "socket.io-client": "^2.0.4"
   }
 }
