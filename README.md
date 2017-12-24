@@ -31,8 +31,16 @@ With this tool you can control Cozmo from the browser. I created it so that my f
 
 ### Starting the server
 
-* Run `server/explorer_tool.py` and open a browser window at http://localhost:5000
+* In the server directory run `python3 explorer_tool.py`
 * In the client directory, run `npm start`
+* Open http://localhost:5000 in a browser
+
+## Exposing web application to the internet
+
+* Install and configure webserver (see [sample configuration for `nginx`](./nginx.conf))
+* Configure your router to forward port 80 to your computer
+* Set `client`'s `dependencies.env.SERVER` variable to your public ip address
+  * Change it by setting the environment variable `SERVER` or directly from [client/js/main.js](./client/js/main.js)
 
 ## License
 

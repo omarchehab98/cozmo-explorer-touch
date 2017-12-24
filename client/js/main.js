@@ -14,7 +14,7 @@ import createSocket from './socket.js';
 window.addEventListener('load', () => {
   const dependencies = {
     env: {
-      SERVER: process.env.SERVER || 'localhost',
+      SERVER: process.env.SERVER || 'localhost:5001',
       HTTP: process.env.SSL === 'yes' ? 'https' : 'http',
       WS: process.env.SSL === 'yes' ? 'wss' : 'ws',
     },
